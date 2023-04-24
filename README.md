@@ -23,5 +23,7 @@ Example: https://imgur.com/a/0aIh4XM
 - `Create .promo file` - will generate the .promo file. Click this once you are done making the custom promo.
 ### Manual .promo Editing
 .promo files can be opened and edited in notepad. For more information about how to edit them manually read the [WECCL documentation](https://thunderstore.io/c/wrestling-empire/p/IngoH/WECCL/).
+## Tips
+Tipping can be done here: https://ko-fi.com/gamingmasterlt
 ## Special Thanks
 IngoH for creating WECCL and letting this come to life.
