@@ -2,9 +2,9 @@
   "namespace": "GeeEm",
   "name": "PromoGenerator",
   "description": "READ INSTRUCTIONS! Custom promo generator tool.",
-  "version_number": "1.1.0",
+  "version_number": "1.2.0",
   "dependencies": [
-    "IngoH-WECCL-1.2.1"
+    "IngoH-WECCL-1.2.5"
   ],
   "website_url": "https://github.com/TautvisStan/WE-Custom-Promo-Generator"
 }
