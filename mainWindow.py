@@ -13,7 +13,7 @@ def onFrameConfigure(canvas):
 
 root = tk.Tk()
 root.title("Wrestling Empire Custom Promo Generator")
-root.geometry("600x500")
+root.geometry("500x500")
 canvas = tk.Canvas(root, borderwidth=0)
 frame = tk.Frame(canvas)
 vsb = tk.Scrollbar(root, orient="vertical", command=canvas.yview)
@@ -38,7 +38,7 @@ filemenu.add_command(label="Exit", command=root.quit)
 menubar.add_cascade(label="File", menu=filemenu)
 
 def openWebsite():
-    webbrowser.open("https://thunderstore.io/c/wrestling-empire/p/GeeEm/PromoGenerator/",new=1)
+    webbrowser.open("https://steamcommunity.com/sharedfiles/filedetails/?id=3038504814",new=1)
     
 helpmenu = tk.Menu(menubar, tearoff=0)
 helpmenu.add_command(label="About...", command=openWebsite)
@@ -46,7 +46,7 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 root.config(menu=menubar)
 
 titleFrame = tk.Frame(frame)
-versionLabel = tk.Label(frame,text="Version: 1.2.0")
+versionLabel = tk.Label(frame,text="Version: 1.3.0")
 versionLabel.grid()
 titleLabel = tk.Label(titleFrame,text="Please enter the promo title:")
 titleLabel.grid()
@@ -78,15 +78,35 @@ team2Check.grid()
 refCheck = tk.Checkbutton(frame,text="Is the ref included in the promo?", variable=refVar, onvalue=1, offvalue=0)
 refCheck.grid()
 
-basePromoData = dataContainers.basePromoData(titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar)
-pages = []
-
 idFrame = tk.Frame(frame)
-nextStep = tk.Button(frame, text="Update id list", command=lambda:[features.updateID(idFrame, basePromoData)])
+nextStep = tk.Button(frame, text="Update speaker id list", command=lambda:[features.updateID(idFrame, basePromoData)])
 nextStep.grid()
 
 idFrame.grid()
 tk.Label(idFrame,text="No wrestlers").grid()
+
+
+useNamesVar = tk.IntVar()
+useNamesCheck = tk.Checkbutton(frame,text="Use character names instead of ids in the entry fields below?", variable=useNamesVar, onvalue=1, offvalue=0)
+useNamesCheck.grid()
+
+useNamesLabel = tk.Label(frame,text="(use the checkbox above if you also want to bypass speaker limitations)")
+useNamesLabel.grid()
+
+surpirseEntrantsLabel = tk.Label(frame,text="Enter the surprise wrestler match ids, separated by ',' (leave empty for none)")
+surpirseEntrantsLabel.grid()
+surpirseEntrantsEntry = tk.Entry(frame)
+surpirseEntrantsEntry.grid()
+
+nextPromoLabel = tk.Label(frame,text="Enter the name of the next custom promo to happen right after this (leave empty for none)")
+nextPromoLabel.grid()
+nextPromoEntry = tk.Entry(frame)
+nextPromoEntry.grid()
+
+basePromoData = dataContainers.basePromoData(titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar, useNamesVar, surpirseEntrantsEntry, nextPromoEntry)
+pages = []
+
+
 newPageButton = tk.Button(frame, text="Create new page", command=lambda:[features.newPage(frame, pages)])
 createPromoButton = tk.Button(frame, text="Create .promo file", command=lambda:[features.formatPromo(basePromoData,pages)])
 newPageButton.grid()
