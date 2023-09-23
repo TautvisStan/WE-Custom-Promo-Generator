@@ -108,6 +108,7 @@ def formatPromo(basePromoData, pages):
         total = wrestlers + team1 + team2 + ref
         names = basePromoData.useNamesVar.get()
         surprises = basePromoData.surpriseEntrantsEntry.get()
+        nextPromo = basePromoData.nextPromoEntry.get()
         if len(pages) == 0:
             raise Exception("No pages")
 
@@ -131,6 +132,8 @@ def formatPromo(basePromoData, pages):
             promoFileText += "use_names: True\n"
         if (len(surprises)!=0):
             promoFileText += "surprise_entrants: " + surprises + "\n"
+        if (len(surprises)!=0):
+            promoFileText += "next_promo: " + nextPromo + "\n"
         for x in pages:
             strline = '"' + x.line1Entry.get() + '","' + x.line2Entry.get() + '",' + x.speakerEntry.get() + ',' + x.receiverEntry.get() + ',' + x.tauntEntry.get() + ','
             d = 0
@@ -177,6 +180,7 @@ def cleanUp(basePromoData, pages, idFrame, canvas):
     basePromoData.refVar.set(0)
     basePromoData.useNamesVar.set(0)
     basePromoData.surpriseEntrantsEntry.delete(0, tk.END)
+    basePromoData.nextPromoEntry.delete(0, tk.END)
     for widgets in idFrame.winfo_children():
         widgets.destroy()
     tk.Label(idFrame,text="No wrestlers").grid()
@@ -237,6 +241,9 @@ def loadPromo(basePromoData, pages, idFrame, frame, canvas):
                 promoFileLine+=1
         if(lines[promoFileLine][0:18] == "surprise_entrants:"):
             basePromoData.surpriseEntrantsEntry.insert(-1, lines[promoFileLine][19:].strip())
+            promoFileLine+=1
+        if(lines[promoFileLine][0:11] == "next_promo:"):
+            basePromoData.nextPromoEntry.insert(-1, lines[promoFileLine][12:].strip())
             promoFileLine+=1
         for i, x in enumerate(lines[promoFileLine:]):
             newPageFrame, featureData = newPage(frame, pages)
