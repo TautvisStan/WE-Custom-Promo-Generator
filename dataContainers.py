@@ -1,5 +1,5 @@
 class basePromoData:
-    def __init__(self, titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar, useNamesVar, surpirseEntrantsEntry, nextPromoEntry):
+    def __init__(self, titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar, useNamesVar, surpirseEntrantsEntry, nextPromoEntry, probabilityEntry):
         self.titleEntry = titleEntry
         self.descEntry = descEntry
         self.wrestlersEntry = wrestlersEntry
@@ -10,6 +10,7 @@ class basePromoData:
         self.useNamesVar = useNamesVar
         self.surpriseEntrantsEntry = surpirseEntrantsEntry
         self.nextPromoEntry = nextPromoEntry
+        self.probabilityEntry = probabilityEntry
     
 class singlePageData:
     def __init__(self, line1Entry, line2Entry, speakerEntry, receiverEntry, tauntEntry, demeanorEntry, featureData):

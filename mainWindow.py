@@ -46,7 +46,7 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 root.config(menu=menubar)
 
 titleFrame = tk.Frame(frame)
-versionLabel = tk.Label(frame,text="Version: 1.3.0")
+versionLabel = tk.Label(frame,text="Version: 1.3.1")
 versionLabel.grid()
 titleLabel = tk.Label(titleFrame,text="Please enter the promo title:")
 titleLabel.grid()
@@ -86,6 +86,11 @@ idFrame.grid()
 tk.Label(idFrame,text="No wrestlers").grid()
 
 
+probabilityLabel = tk.Label(frame,text="Enter career probability setting (leave empty for none)")
+probabilityLabel.grid()
+probabilityEntry = tk.Entry(frame,width=50)
+probabilityEntry.grid()
+
 useNamesVar = tk.IntVar()
 useNamesCheck = tk.Checkbutton(frame,text="Use character names instead of ids in the entry fields below?", variable=useNamesVar, onvalue=1, offvalue=0)
 useNamesCheck.grid()
@@ -103,7 +108,7 @@ nextPromoLabel.grid()
 nextPromoEntry = tk.Entry(frame)
 nextPromoEntry.grid()
 
-basePromoData = dataContainers.basePromoData(titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar, useNamesVar, surpirseEntrantsEntry, nextPromoEntry)
+basePromoData = dataContainers.basePromoData(titleEntry, descEntry, wrestlersEntry, team1Var, team2Var, refVar, useNamesVar, surpirseEntrantsEntry, nextPromoEntry, probabilityEntry)
 pages = []
 
 
