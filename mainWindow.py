@@ -40,13 +40,14 @@ menubar.add_cascade(label="File", menu=filemenu)
 def openWebsite():
     webbrowser.open("https://steamcommunity.com/sharedfiles/filedetails/?id=3038504814",new=1)
     
+menubar.add_cascade(label="New Page", command=lambda:[features.newPage(frame, pages)])
 helpmenu = tk.Menu(menubar, tearoff=0)
 helpmenu.add_command(label="About...", command=openWebsite)
 menubar.add_cascade(label="Help", menu=helpmenu)
 root.config(menu=menubar)
 
 titleFrame = tk.Frame(frame)
-versionLabel = tk.Label(frame,text="Version: 1.3.1")
+versionLabel = tk.Label(frame,text="Version: 1.3.2")
 versionLabel.grid()
 titleLabel = tk.Label(titleFrame,text="Please enter the promo title:")
 titleLabel.grid()
