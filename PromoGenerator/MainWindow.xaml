@@ -1,0 +1,128 @@
+﻿<Window x:Class="PromoGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Wrestling Empire Custom Promo Generator"
+        Height="500" Width="600">
+    <DockPanel>
+
+        <!-- Top Menu -->
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Click="New_Click"/>
+                <MenuItem Header="Open" Click="Open_Click"/>
+                <MenuItem Header="Save" Click="SavePromo_Click"/>
+                <Separator/>
+                <MenuItem Header="Exit" Click="Exit_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="New Page" Click="AddPage_Click"/>
+
+            <MenuItem Header="Help">
+                <MenuItem Header="About..." Click="About_Click"/>
+            </MenuItem>
+        </Menu>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <TextBlock Text="Version: 2.0.0" Margin="0,5,0,10" HorizontalAlignment="Center"/>
+                <!-- Title -->
+                <TextBlock Text="Please enter the promo title:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="TitleTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="150"/>
+
+                <!-- Description -->
+                <TextBlock Text="Please enter the promo description: (You can use '[P1]' and '[P2]' to name wrestlers)" HorizontalAlignment="Center"/>
+                <TextBox x:Name="DescriptionTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="300"/>
+
+                <!-- Wrestlers -->
+                <TextBlock Text="How many speakers are there? Min 0, max 3, not counting the ref or team partners:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="WrestlersTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="150"/>
+
+                <!-- Checkboxes -->
+                <CheckBox x:Name="Team1CheckBox"
+                      Content="Is the wrestler 1 team partner included in the promo?" Margin="0,5,0,10" HorizontalAlignment="Center"/>
+
+                <CheckBox x:Name="Team2CheckBox"
+                      Content="Is the wrestler 2 team partner included in the promo?" Margin="0,5,0,10" HorizontalAlignment="Center"/>
+
+                <CheckBox x:Name="RefCheckBox"
+                      Content="Is the ref included in the promo?" Margin="0,5,0,10" HorizontalAlignment="Center"/>
+
+                <Button x:Name="UpdateSpeakers" Content="Update speaker id list" Margin="0,5,0,10" HorizontalAlignment="Center" Click="UpdateSpeakers_Click"/>
+                <ItemsControl ItemsSource="{Binding IdList}" HorizontalAlignment="Center" Margin="0,5,0,10">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Margin="0,2"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock Text="Enter career probability setting (leave empty for none)" HorizontalAlignment="Center"/>
+                <TextBox x:Name="ProbabilityTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="300"/>
+
+                <CheckBox x:Name="UseNamesCheckBox"
+                      Content="Use character names instead of ids in the entry fields below?" Margin="0,5,0,0" HorizontalAlignment="Center"/>
+                <TextBlock Text="(use the checkbox above if you also want to bypass speaker limitations)"  Margin="0,0,0,10" HorizontalAlignment="Center"/>
+
+                <TextBlock Text="Enter the surprise wrestler match ids, separated by ',' (leave empty for none)" HorizontalAlignment="Center"/>
+                <TextBox x:Name="SurpriseEntrantsTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="150"/>
+
+                <TextBlock Text="Enter the name of the next custom promo to happen right after this (leave empty for none)" HorizontalAlignment="Center"/>
+                <TextBox x:Name="NextPromoTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="150"/>
+
+                <Button x:Name="NewPageButton" Content="Create new page" Margin="0,5,0,10" HorizontalAlignment="Center" Click="AddPage_Click"/>
+                <Button x:Name="CreatePromoButton" Content="Create .promo file" Margin="0,5,0,10" HorizontalAlignment="Center" Click="SavePromo_Click"/>
+
+                <ItemsControl ItemsSource="{Binding Pages}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="Gray" BorderThickness="1" Margin="0,5" Padding="10">
+                                <StackPanel>
+
+                                    <TextBlock Text="Enter the first line of the speaker:" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Line1}" Width="300" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="Enter the second line of the speaker:" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Line2}" Width="300" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="Enter the speaker id:" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Speaker}" Width="150" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="Enter the receiver id:" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Receiver}" Width="150" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="Enter the taunt name or number (0 for none):" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Taunt}" Width="150" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <TextBlock Text="Is the speaker happy (H) or angry (A)? (enter 0 for none):" HorizontalAlignment="Center"/>
+                                    <TextBox Text="{Binding Demeanor}" Width="150" Margin="0,2,0,5" HorizontalAlignment="Center"/>
+
+                                    <!-- Features section (we'll expand later) -->
+                                    <TextBlock Text="Features:" Margin="0,5,0,2" HorizontalAlignment="Center"/>
+                                    <Button Content="Add Feature"
+                                    Margin="0,5,0,5" HorizontalAlignment="Center"
+                                    Click="AddFeature_Click"/>
+                                    <ItemsControl ItemsSource="{Binding Features}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <TextBox Text="{Binding FeatureText}" Margin="0,5,0,5" Width="300"/>
+                                                    <Button Content="X" Tag="{Binding}"
+                                                    Margin="5,5,0,5" HorizontalAlignment="Center"
+                                                    Click="DeleteFeature_Click"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <Button Content="Delete Page"
+                                    Margin="0,5,0,0" HorizontalAlignment="Center"
+                                    Click="DeletePage_Click"/>
+
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
