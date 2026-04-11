@@ -1,22 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PromoGenerator
 {
@@ -126,19 +117,24 @@ namespace PromoGenerator
                 var dialog = new SaveFileDialog
                 {
                     Filter = "Promo files (*.promo)|*.promo|All files (*.*)|*.*",
-                    FileName = TitleTextBox.Text + ".promo"
+                    FileName = TitleTextBox.Text + ".promo",
+                    InitialDirectory = Directory.GetCurrentDirectory()
                 };
 
                 if (dialog.ShowDialog() == true)
                 {
                     File.WriteAllText(dialog.FileName, promoText);
-                    MessageBox.Show(".promo file was successfully generated!");
+                    MessageBox.Show(".promo file was successfully generated!", "Success");
                 }
+            }
+            catch (HandledException ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error!");
             }
             catch (Exception ex)
             {
                 File.WriteAllText("log.txt", ex.ToString());
-                MessageBox.Show("An error has occurred. Check log.txt");
+                MessageBox.Show("An error has occurred. Check log.txt", "Error!");
             }
         }
         private void ClearAll()
@@ -173,10 +169,14 @@ namespace PromoGenerator
                 {
                     LoadPromo(dialog.FileName);
                 }
+                catch (HandledException ex)
+                {
+                    MessageBox.Show(ex.Message.ToString(), "Error!");
+                }
                 catch (Exception ex)
                 {
                     File.WriteAllText("log.txt", ex.ToString());
-                    MessageBox.Show("Failed to load the file.");
+                    MessageBox.Show("Failed to load the file.", "Error!");
                 }
             }
         }
@@ -199,14 +199,14 @@ namespace PromoGenerator
 
             string title = TitleTextBox.Text;
             if (string.IsNullOrWhiteSpace(title))
-                throw new Exception("No title");
+                throw new HandledException("No title");
 
             string description = DescriptionTextBox.Text;
             if (string.IsNullOrWhiteSpace(description))
-                throw new Exception("No description");
+                throw new HandledException("No description");
 
             if (!int.TryParse(WrestlersTextBox.Text, out int wrestlers))
-                throw new Exception("Invalid wrestlers");
+                throw new HandledException("Invalid wrestlers");
 
             bool team1 = Team1CheckBox.IsChecked == true;
             bool team2 = Team2CheckBox.IsChecked == true;
@@ -218,7 +218,7 @@ namespace PromoGenerator
             string probability = ProbabilityTextBox?.Text ?? "";
 
             if (Pages.Count == 0)
-                throw new Exception("No pages");
+                throw new HandledException("No pages");
 
             // Header
             sb.AppendLine($"title: {title}");
