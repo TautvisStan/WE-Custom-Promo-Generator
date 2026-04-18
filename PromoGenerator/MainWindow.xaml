@@ -23,7 +23,7 @@
         </Menu>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="10">
-                <TextBlock Text="Version: 2.0.0" Margin="0,5,0,10" HorizontalAlignment="Center"/>
+                <TextBlock Text="Version: 2.0.1" Margin="0,5,0,10" HorizontalAlignment="Center"/>
                 <!-- Title -->
                 <TextBlock Text="Please enter the promo title:" HorizontalAlignment="Center"/>
                 <TextBox x:Name="TitleTextBox" Margin="0,5,0,10" HorizontalAlignment="Center" Width="150"/>

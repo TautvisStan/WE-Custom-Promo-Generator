@@ -256,9 +256,9 @@ namespace PromoGenerator
                 string line1 = page.Line1 ?? "";
                 string line2 = page.Line2 ?? "";
 
-                int speaker = int.TryParse(page.Speaker, out var s) ? s : 0;
-                int receiver = int.TryParse(page.Receiver, out var r) ? r : 0;
-                int taunt = int.TryParse(page.Taunt, out var t) ? t : 0;
+                string speaker = page.Speaker;
+                string receiver = page.Receiver;
+                string taunt = page.Taunt;
 
                 int demeanor = 0;
                 if (page.Demeanor == "H") demeanor = 50;
