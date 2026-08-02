@@ -1,13 +1,22 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <SignAssembly>False</SignAssembly>
     <AssemblyName>WECustomPromoGenerator</AssemblyName>
+    <AssemblyTitle>WE Custom Promo Generator</AssemblyTitle>
     <RootNamespace>PromoGenerator</RootNamespace>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <Version>2.0.1.1</Version>
+    <Authors>GeeEm</Authors>
+    <Company>GeeEm</Company>
+    <Product>WE Custom Promo Generator</Product>
+    <Description>Editor for creating custom .promo files for Wrestling Empire.</Description>
+    <Copyright>Copyright © GeeEm</Copyright>
+    <PackageProjectUrl>https://github.com/TautvisStan/WE-Custom-Promo-Generator</PackageProjectUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="icon.ico" />
-  </ItemGroup>
+
 </Project>
