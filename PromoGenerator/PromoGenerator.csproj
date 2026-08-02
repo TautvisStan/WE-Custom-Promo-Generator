@@ -8,9 +8,10 @@
     <UseWPF>true</UseWPF>
     <SignAssembly>False</SignAssembly>
     <AssemblyName>WECustomPromoGenerator</AssemblyName>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyTitle>WE Custom Promo Generator</AssemblyTitle>
     <RootNamespace>PromoGenerator</RootNamespace>
-    <Version>2.0.1.1</Version>
+    <Version>2.0.1.2</Version>
     <Authors>GeeEm</Authors>
     <Company>GeeEm</Company>
     <Product>WE Custom Promo Generator</Product>
